@@ -33,18 +33,23 @@ Sharon Britto, Luc Do, Melvin Lanojan, Lillie Mellin, Jason Yang
 
 ## Actionables:
 - **Sharon**
+
 Solving Riddles 
 - **Luc**
+
 Turning a Potentiometer
 
 Sound effects
 - **Melvin**
+
 Navigating Rocky Shores 
 - **Lillie**
+
 Deciphering LED’s
 
 Physical Game Board
 
 Reading data from the board
 - **Jason**
+
 Timers 
