@@ -11,6 +11,7 @@ Sharon Britto, Luc Do, Melvin Lanojan, Lillie Mellin, Jason Yang
 ## Key Discussions: 
 - **Continue working on code**
 - **Melvin brings PTU home to work on module**
+- **Sharon got Op Amp Comparator working and connected to microcontroller LED**
   
 
 ## Decisions made:
