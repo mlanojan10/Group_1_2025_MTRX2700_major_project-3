@@ -1,0 +1,6 @@
+../Src/main.c:9:5:__io_putchar	1
+../Src/main.c:52:6:ToLowerCase	3
+../Src/main.c:60:6:SeedRandomGenerator	1
+../Src/main.c:65:6:AskNewRiddle	1
+../Src/main.c:73:6:OnLineReceived	6
+../Src/main.c:95:5:main	4

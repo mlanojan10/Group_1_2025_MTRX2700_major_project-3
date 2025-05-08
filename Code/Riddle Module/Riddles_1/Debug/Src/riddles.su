@@ -1,0 +1,8 @@
+../Inc/core_cm4.h:1688:22:__NVIC_EnableIRQ	16	static
+../Src/riddles.c:41:6:SerialInitialise	32	static
+../Src/riddles.c:72:6:SerialOutputChar	16	static
+../Src/riddles.c:78:6:SerialOutputString	16	static
+../Src/riddles.c:85:9:SerialGetChar	16	static
+../Src/riddles.c:91:6:SerialSetReceiveCallback	16	static
+../Src/riddles.c:96:6:SerialStartTransmission	16	static
+../Src/riddles.c:103:6:USART1_EXTI25_IRQHandler	16	static
