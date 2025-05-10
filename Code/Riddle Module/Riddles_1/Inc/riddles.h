@@ -9,6 +9,7 @@
 struct _SerialPort;
 typedef struct _SerialPort SerialPort;
 
+void OnLineReceived(char *string, uint32_t length);
 
 // make any number of instances of the serial port (they are extern because
 //   they are fixed, unique values)

@@ -1,8 +1,76 @@
 #include <riddles.h>
 #include <string.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <ctype.h>
 #include "stm32f303xc.h"
 
+typedef struct {
+    const char *riddle;
+    const char *answer;
+} Riddle;
 
+static Riddle riddles[] = {
+    {"I follow you all the time and copy your every move, but you can’t touch me or catch me. What am I?", "shadow"},
+    {"I speak without a mouth and hear without ears. I have nobody, but I come alive with the wind. What am I?", "echo"},
+    {"I have keys but no locks. I have space but no room. You can enter but can’t go outside. What am I?", "keyboard"},
+    {"The more of me you take, the more you leave behind. What am I?", "footsteps"},
+    {"What gets wetter the more it dries?", "towel"}
+};
+
+#define NUM_RIDDLES (sizeof(riddles) / sizeof(Riddle))
+
+static Riddle current_riddle;
+static char rx_buffers[2][64];
+static uint8_t active_rx_buf = 0;
+static uint32_t rx_index = 0;
+static const char *tx_buffer = NULL;
+static uint32_t tx_index = 0;
+static uint8_t game_progress = 0b0001;
+
+// ---------------- Riddle Management -----------------
+
+static void ToLowerCase(char *str) {
+    while (*str) {
+        *str = tolower((unsigned char)*str);
+        str++;
+    }
+}
+
+void AskNewRiddle(void) {
+    int index = rand() % NUM_RIDDLES;
+    current_riddle = riddles[index];
+    printf("\r\nAHOY - It's Riddle Time! Solve this riddle to find the next step to the treasure.\r\n%s\r\n> ", current_riddle.riddle);
+}
+
+void OnLineReceived(char *string, uint32_t length) {
+    static char user_input[64];
+    strncpy(user_input, string, sizeof(user_input) - 1);
+    user_input[sizeof(user_input) - 1] = '\0';
+    ToLowerCase(user_input);
+
+    if ((game_progress & 0b0001) && !(game_progress & 0b0010)) {
+        if (strcmp(user_input, current_riddle.answer) == 0) {
+            printf("\r\nCorrect! You solved it!\r\n");
+            game_progress |= 0b0010;
+            printf("\r\nYou've unlocked the next challenge!\r\n");
+        } else {
+            printf("\r\nIncorrect. Try again!\r\n> ");
+        }
+    } else if (!(game_progress & 0b0001)) {
+        printf("\r\nYou must complete Minigame 1 before attempting this!\r\n");
+    } else if (game_progress & 0b0010) {
+        printf("\r\nYou've already completed this riddle challenge! Proceed to the next game.\r\n");
+    }
+}
+
+uint8_t isMinigame1Completed(void) {
+    return (game_progress & 0b0001) != 0;
+}
+
+uint8_t isMinigame2Completed(void) {
+    return (game_progress & 0b0010) != 0;
+}
 
 //--------------------------USART CONFIGURATION------------------
 // Structure defining configuration for a serial port
@@ -28,14 +96,14 @@ SerialPort USART1_PORT = {
     0x00, 0x00
 };
 
-// Double buffer for received input lines
+/*// Double buffer for received input lines
 static char rx_buffers[2][64];
 static uint8_t active_rx_buf = 0;   // Active buffer index
 static uint32_t rx_index = 0;       // Index into current buffer
 
 // Pointer to currently transmitting string
 static const char *tx_buffer = NULL;
-static uint32_t tx_index = 0;
+static uint32_t tx_index = 0;*/
 
 // Initializes UART hardware and GPIO settings for communication
 void SerialInitialise(uint32_t baudRate, SerialPort *serial_port, void (*completion_function)(uint32_t)) {
