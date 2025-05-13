@@ -10,7 +10,7 @@ int __io_putchar(int ch) {
 
 static uint8_t riddleAsked = 0;
 static uint8_t completedMessageShown = 0;
-static uint8_t prevPA3State = 0;  // For edge detection on PA3
+static uint8_t prevPA3State = 0;
 
 void InitialisePA1AsInput(void) {
     RCC->AHBENR |= RCC_AHBENR_GPIOAEN;
@@ -31,7 +31,7 @@ int main(void) {
     SerialSetReceiveCallback(&USART1_PORT, OnLineReceived);
 
     while (1) {
-        // Handle PA1: Riddle module trigger
+        // PA1 triggers riddle module
         if ((GPIOA->IDR & (1 << 1)) && isMinigame1Completed() && !isMinigame2Completed() && !riddleAsked) {
             AskNewRiddle();
             riddleAsked = 1;
@@ -45,11 +45,11 @@ int main(void) {
             completedMessageShown = 0;
         }
 
-        // Handle PA3: LED module trigger (only once per activation)
+        // PA3 triggers next module
         uint8_t currentPA3State = (GPIOA->IDR & (1 << 3)) != 0;
         if (currentPA3State && !prevPA3State && isMinigame2Completed()) {
             printf("\r\nLED module\r\n");
-            // If needed: game_progress |= 0b0100;
+            // game_progress |= 0b0100;
         }
         prevPA3State = currentPA3State;
     }

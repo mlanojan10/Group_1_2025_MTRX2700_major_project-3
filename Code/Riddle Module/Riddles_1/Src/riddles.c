@@ -28,7 +28,11 @@ static const char *tx_buffer = NULL;
 static uint32_t tx_index = 0;
 static uint8_t game_progress = 0b0001;
 
-// ---------------- Riddle Management -----------------
+// --- NEW internal state tracking ---
+static uint8_t riddle_step = 0; // 0: riddle, 1: math, 2: cipher
+static int math_answer = 0;
+
+// ------------------- Utility Functions -------------------
 
 static void ToLowerCase(char *str) {
     while (*str) {
@@ -37,10 +41,36 @@ static void ToLowerCase(char *str) {
     }
 }
 
+static void CaesarCipher(char *dest, const char *src, int shift) {
+    while (*src) {
+        if (isalpha(*src)) {
+            char base = islower(*src) ? 'a' : 'A';
+            *dest = (char)(((*src - base + shift) % 26) + base);
+        } else {
+            *dest = *src;
+        }
+        src++;
+        dest++;
+    }
+    *dest = '\0';
+}
+
+// ------------------- Game Flow -------------------
+
 void AskNewRiddle(void) {
     int index = rand() % NUM_RIDDLES;
     current_riddle = riddles[index];
+    riddle_step = 0;  // Reset internal riddle state
     printf("\r\nAHOY - It's Riddle Time! Solve this riddle to find the next step to the treasure.\r\n%s\r\n> ", current_riddle.riddle);
+}
+
+static void AskMathQuestion(void) {
+    math_answer = (rand() % 5) + 1;
+    printf("\r\nNow answer this: What is %d + 0?\r\n> ", math_answer);
+}
+
+static void AskCaesarChallenge(void) {
+    printf("\r\nFinal task! Enter the Caesar cipher of the riddle answer with a shift of %d.\r\n> ", math_answer);
 }
 
 void OnLineReceived(char *string, uint32_t length) {
@@ -49,20 +79,60 @@ void OnLineReceived(char *string, uint32_t length) {
     user_input[sizeof(user_input) - 1] = '\0';
     ToLowerCase(user_input);
 
-    if ((game_progress & 0b0001) && !(game_progress & 0b0010)) {
-        if (strcmp(user_input, current_riddle.answer) == 0) {
-            printf("\r\nCorrect! You solved it!\r\n");
-            game_progress |= 0b0010;
-            printf("\r\nYou've unlocked the next challenge!\r\n");
-        } else {
-            printf("\r\nIncorrect. Try again!\r\n> ");
-        }
-    } else if (!(game_progress & 0b0001)) {
+    if (!(game_progress & 0b0001)) {
         printf("\r\nYou must complete Minigame 1 before attempting this!\r\n");
-    } else if (game_progress & 0b0010) {
+        return;
+    }
+
+    if (game_progress & 0b0010) {
         printf("\r\nYou've already completed this riddle challenge! Proceed to the next game.\r\n");
+        return;
+    }
+
+    switch (riddle_step) {
+        case 0:  // Solve riddle
+            if (strcmp(user_input, current_riddle.answer) == 0) {
+                printf("\r\nCorrect! Step 1 complete.\r\n");
+                riddle_step = 1;
+                AskMathQuestion();
+            } else {
+                printf("\r\nIncorrect. Try again!\r\n> ");
+            }
+            break;
+
+        case 1: { // Solve math
+            int answer = atoi(user_input);
+            if (answer == math_answer) {
+                printf("\r\nWell done! Step 2 complete.\r\n");
+                riddle_step = 2;
+                AskCaesarChallenge();
+            } else {
+                printf("\r\nThat's not right. Try again!\r\n> ");
+            }
+            break;
+        }
+
+        case 2: { // Caesar cipher
+            char expected[64];
+            CaesarCipher(expected, current_riddle.answer, math_answer);
+
+            if (strcmp(user_input, expected) == 0) {
+                printf("\r\nIncredible! You completed all steps of the Riddle Challenge!\r\n");
+                game_progress |= 0b0010;
+            } else {
+                printf("\r\nHmm, that’s not correct. Try again!\r\n> ");
+            }
+            break;
+        }
+
+        default:
+            printf("\r\nUnexpected step. Restarting riddle.\r\n");
+            AskNewRiddle();
+            break;
     }
 }
+
+// ----------------- Game Progress Accessors -----------------
 
 uint8_t isMinigame1Completed(void) {
     return (game_progress & 0b0001) != 0;
