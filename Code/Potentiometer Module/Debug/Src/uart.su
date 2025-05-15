@@ -1,0 +1,5 @@
+../Src/uart.c:44:6:SerialInitialise	32	static
+../Src/uart.c:102:6:SerialOutputChar	16	static
+../Src/uart.c:112:6:SerialOutputString	24	static
+../Src/uart.c:127:9:SerialGetChar	16	static
+../Src/uart.c:134:6:SerialInputLine	32	static
