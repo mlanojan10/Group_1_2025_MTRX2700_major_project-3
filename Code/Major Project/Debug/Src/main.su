@@ -1,6 +1,0 @@
-../Src/main.c:9:5:__io_putchar	16	static
-../Src/main.c:14:5:__io_getchar	8	static
-../Src/main.c:24:6:initialise_PA1_as_input	4	static
-../Src/main.c:30:6:initialise_PE8_as_output	4	static
-../Src/main.c:37:6:delay_ms	24	static
-../Src/main.c:42:5:main	32	static
