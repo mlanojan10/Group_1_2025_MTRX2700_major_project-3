@@ -26,10 +26,14 @@ static uint8_t active_rx_buf = 0;
 static uint32_t rx_index = 0;
 static const char *tx_buffer = NULL;
 static uint32_t tx_index = 0;
-static uint8_t game_progress = 0b0001;
+//static uint8_t game_progress = 0b0001;
+extern volatile uint8_t game_progress;
+
 
 // --- NEW internal state tracking ---
 static uint8_t riddle_step = 0; // 0: riddle, 1: math, 2: cipher
+static int math_1 = 0;
+static int math_2 = 0;
 static int math_answer = 0;
 
 // ------------------- Utility Functions -------------------
@@ -65,8 +69,11 @@ void AskNewRiddle(void) {
 }
 
 static void AskMathQuestion(void) {
-    math_answer = (rand() % 5) + 1;
-    printf("\r\nNow answer this: What is %d + 0?\r\n> ", math_answer);
+
+	math_1 = (rand() % 5);
+    math_2 = (rand() % 5);
+	math_answer = math_1 + math_2;
+    printf("\r\nNow answer this: What is %d + %d?\r\n> ", math_1, math_2);
 }
 
 static void AskCaesarChallenge(void) {
@@ -79,7 +86,7 @@ void OnLineReceived(char *string, uint32_t length) {
     user_input[sizeof(user_input) - 1] = '\0';
     ToLowerCase(user_input);
 
-    if (!(game_progress & 0b0001)) {
+    /*if (!(game_progress & 0b0001)) {
         printf("\r\nYou must complete Minigame 1 before attempting this!\r\n");
         return;
     }
@@ -87,7 +94,7 @@ void OnLineReceived(char *string, uint32_t length) {
     if (game_progress & 0b0010) {
         printf("\r\nYou've already completed this riddle challenge! Proceed to the next game.\r\n");
         return;
-    }
+    }*/
 
     switch (riddle_step) {
         case 0:  // Solve riddle
@@ -132,7 +139,7 @@ void OnLineReceived(char *string, uint32_t length) {
     }
 }
 
-// ----------------- Game Progress Accessors -----------------
+/*// ----------------- Game Progress Accessors -----------------
 
 uint8_t isMinigame1Completed(void) {
     return (game_progress & 0b0001) != 0;
@@ -140,7 +147,7 @@ uint8_t isMinigame1Completed(void) {
 
 uint8_t isMinigame2Completed(void) {
     return (game_progress & 0b0010) != 0;
-}
+}*/
 
 //--------------------------USART CONFIGURATION------------------
 // Structure defining configuration for a serial port

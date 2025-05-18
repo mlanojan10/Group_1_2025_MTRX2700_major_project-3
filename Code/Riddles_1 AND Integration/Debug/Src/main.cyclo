@@ -1,0 +1,6 @@
+../Src/main.c:6:5:__io_putchar	1
+../Src/main.c:17:6:InitialisePA1AsInput	1
+../Src/main.c:23:6:InitialisePA3AsInput	1
+../Src/main.c:29:6:InitialisePA5AsInput	1
+../Src/main.c:35:6:delay_ms	3
+../Src/main.c:44:5:main	21

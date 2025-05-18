@@ -1,0 +1,6 @@
+../Src/main.c:6:5:__io_putchar	16	static
+../Src/main.c:17:6:InitialisePA1AsInput	4	static
+../Src/main.c:23:6:InitialisePA3AsInput	4	static
+../Src/main.c:29:6:InitialisePA5AsInput	4	static
+../Src/main.c:35:6:delay_ms	24	static,ignoring_inline_asm
+../Src/main.c:44:5:main	16	static

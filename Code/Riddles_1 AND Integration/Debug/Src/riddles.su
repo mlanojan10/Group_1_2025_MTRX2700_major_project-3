@@ -1,0 +1,14 @@
+../Inc/core_cm4.h:1688:22:__NVIC_EnableIRQ	16	static
+../Src/riddles.c:41:13:ToLowerCase	24	static
+../Src/riddles.c:48:13:CaesarCipher	32	static
+../Src/riddles.c:64:6:AskNewRiddle	24	static
+../Src/riddles.c:71:13:AskMathQuestion	8	static
+../Src/riddles.c:79:13:AskCaesarChallenge	8	static
+../Src/riddles.c:83:6:OnLineReceived	88	static
+../Src/riddles.c:186:6:SerialInitialise	32	static
+../Src/riddles.c:217:6:SerialOutputChar	16	static
+../Src/riddles.c:223:6:SerialOutputString	16	static
+../Src/riddles.c:230:9:SerialGetChar	16	static
+../Src/riddles.c:236:6:SerialSetReceiveCallback	16	static
+../Src/riddles.c:241:6:SerialStartTransmission	16	static
+../Src/riddles.c:248:6:USART1_EXTI25_IRQHandler	16	static
