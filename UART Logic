@@ -1,0 +1,46 @@
+// This is the logic / what needs to be called in the main functions of each code so that the correct signals are sent / received 
+
+// For the master board (the board with the integration and all the other code) - note that the existing code goes in / around this here - need Sharon's help to include this in the correct places
+
+#include "stm32f303xc.h"
+#include "uart4.h"
+
+int main(void) {
+    UART4_Init();
+
+    // Send 'S' to signal start
+    UART4_SendChar('S');
+
+    // Wait for 'D' = done response
+    while (1) {
+        uint8_t response = UART4_ReceiveChar();
+        if (response == 'D') {
+            // Game finished
+            // e.g., toggle an LED or send message over PuTTY
+            UART4_SendString("Game Complete!\r\n");
+        }
+    }
+}
+
+// For the slave board (my board with the touch sensor logic - this board receives the start 'S' message from the master, runs the game (if user does it wrong it will display all red LEDs so that only a done 'D' signal needs to be sent back to Master for simplicity)
+
+#include "stm32f303xc.h"
+#include "uart4.h"
+
+
+int main(void) {
+    UART4_Init();
+
+    // Wait for 'S' to start game
+    while (1) {
+        uint8_t c = UART4_ReceiveChar();
+        if (c == 'S') {
+            break;
+        }
+    }
+
+    StartMinigame(&htsc); // this is how I call my game in my main to start
+
+    // After game is complete
+    UART4_SendChar('D');
+}
