@@ -1,0 +1,5 @@
+../Core/Src/game.c:20:9:read_touch_sensor_debug	5
+../Core/Src/game.c:73:6:StartMinigame	7
+../Core/Src/game.c:142:6:Game_ShowInstructions	1
+../Core/Src/game.c:148:6:Game_ShowResult	2
+../Core/Src/game.c:156:6:Game_CheckPattern	3

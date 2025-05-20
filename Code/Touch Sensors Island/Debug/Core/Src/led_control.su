@@ -1,0 +1,5 @@
+../Core/Src/led_control.c:6:13:delay_ms	24	static,ignoring_inline_asm
+../Core/Src/led_control.c:13:6:LED_Init	4	static
+../Core/Src/led_control.c:19:6:LED_Set	16	static
+../Core/Src/led_control.c:28:6:LED_ClearAll	4	static
+../Core/Src/led_control.c:32:6:LED_DisplayPattern	32	static
