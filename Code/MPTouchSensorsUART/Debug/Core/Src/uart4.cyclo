@@ -1,0 +1,3 @@
+../Core/Src/uart4.c:6:6:UART4_Init	1
+../Core/Src/uart4.c:26:6:UART4_SendByte	3
+../Core/Src/uart4.c:33:9:UART4_ReceiveByte	2
