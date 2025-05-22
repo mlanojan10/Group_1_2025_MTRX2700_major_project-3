@@ -2,6 +2,8 @@
 
 // For the master board (the board with the integration and all the other code) - note that the existing code goes in / around this here - need Sharon's help to include this in the correct places
 
+// Note that we need to send 1 or 0 not a character anymore
+
 #include "stm32f303xc.h"
 #include "uart4.h"
 
