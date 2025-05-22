@@ -147,9 +147,9 @@ void Game_ShowInstructions(SerialPort *serial) {
 
 void Game_ShowResult(bool success, SerialPort *serial) {
     if (success) {
-        SerialOutputString((uint8_t *)"\r\n✅ Correct pattern! You win!\r\n\r\n", serial);
+        SerialOutputString((uint8_t *)"\r\n Correct pattern! You win!\r\n\r\n", serial);
     } else {
-        SerialOutputString((uint8_t *)"\r\n❌ Wrong pattern. Restarting...\r\n\r\n", serial);
+        SerialOutputString((uint8_t *)"\r\n Wrong pattern. Restarting...\r\n\r\n", serial);
     }
 }
 
