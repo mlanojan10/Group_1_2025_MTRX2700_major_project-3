@@ -1,0 +1,6 @@
+../Src/riddle.c:40:13:ToLowerCase	3
+../Src/riddle.c:47:13:CaesarCipher	4
+../Src/riddle.c:61:13:AskNewRiddle	1
+../Src/riddle.c:69:13:AskMathQuestion	1
+../Src/riddle.c:77:13:AskCaesarChallenge	1
+../Src/riddle.c:82:6:riddle_game	14

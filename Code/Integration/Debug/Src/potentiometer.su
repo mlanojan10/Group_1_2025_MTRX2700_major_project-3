@@ -1,0 +1,6 @@
+../Src/potentiometer.c:14:6:InitialisePA1AsInput	4	static
+../Src/potentiometer.c:20:6:InitialisePA2AsInput	4	static
+../Src/potentiometer.c:26:6:InitialisePA3AsInput	4	static
+../Src/potentiometer.c:32:6:InitialisePA4AsInput	4	static
+../Src/potentiometer.c:38:6:InitialisePA5AsInput	4	static
+../Src/potentiometer.c:49:6:potentiometer_game	40	static

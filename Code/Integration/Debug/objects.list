@@ -1,0 +1,7 @@
+"./Src/new.o"
+"./Src/potentiometer.o"
+"./Src/riddle.o"
+"./Src/syscalls.o"
+"./Src/sysmem.o"
+"./Src/uart.o"
+"./Startup/startup_stm32f303vctx.o"

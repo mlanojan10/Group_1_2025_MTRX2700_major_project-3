@@ -1,0 +1,6 @@
+../Src/riddle.c:40:13:ToLowerCase	24	static
+../Src/riddle.c:47:13:CaesarCipher	32	static
+../Src/riddle.c:61:13:AskNewRiddle	24	static
+../Src/riddle.c:69:13:AskMathQuestion	8	static
+../Src/riddle.c:77:13:AskCaesarChallenge	8	static
+../Src/riddle.c:82:6:riddle_game	80	static

@@ -1,0 +1,7 @@
+../Src/new.c:11:6:island3_game	8	static
+../Src/new.c:17:6:island4_game	8	static
+../Src/new.c:25:5:__io_putchar	16	static
+../Src/new.c:30:5:__io_getchar	8	static
+../Src/new.c:34:6:delay_ms	24	static
+../Src/new.c:38:6:Initialise_All	8	static
+../Src/new.c:47:5:main	16	static
