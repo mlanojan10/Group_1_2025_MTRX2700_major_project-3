@@ -11,31 +11,31 @@
 extern volatile uint8_t game_progress;
 
 
-void InitialisePA1AsInput(void) {    //island 1
+void InitialisePA1AsInput(void) {    //island LDR 1
     RCC->AHBENR |= RCC_AHBENR_GPIOAEN;
     GPIOA->MODER &= ~(3U << (1 * 2));
     GPIOA->PUPDR &= ~(3U << (1 * 2));
 }
 
-void InitialisePA2AsInput(void) {    //island 2
+void InitialisePA2AsInput(void) {    //island LDR 2
     RCC->AHBENR |= RCC_AHBENR_GPIOAEN;
     GPIOA->MODER &= ~(3U << (2 * 2));
     GPIOA->PUPDR &= ~(3U << (2 * 2));
 }
 
-void InitialisePA3AsInput(void) {    //island 3
+void InitialisePA3AsInput(void) {    //island LDR 3
     RCC->AHBENR |= RCC_AHBENR_GPIOAEN;
     GPIOA->MODER &= ~(3U << (3 * 2));
     GPIOA->PUPDR &= ~(3U << (3 * 2));
 }
 
-void InitialisePA4AsInput(void) {     //island 4
+void InitialisePA4AsInput(void) {     //island LDR 4
     RCC->AHBENR |= RCC_AHBENR_GPIOAEN;         // Enable GPIOA clock
     GPIOA->MODER &= ~(3U << (4 * 2));          // Set PA5 as input (00)
     GPIOA->PUPDR &= ~(3U << (4 * 2));          // No pull-up, pull-down
 }
 
-void InitialisePA5AsInput(void) {    //island 5
+void InitialisePA5AsInput(void) {    //Potentiometer Input
     RCC->AHBENR |= RCC_AHBENR_GPIOAEN;
     GPIOA->MODER &= ~(3U << (5 * 2));
     GPIOA->PUPDR &= ~(3U << (5 * 2));
@@ -58,7 +58,7 @@ void potentiometer_game(void) {
 		 printf("\r");
 		delay_ms(1000);
 		printf("YOU HAVE FOUND THE TREASURE, BUT IT IS LOCKED!\r\n");
-		printf("To crack the code and open the treasure chest, you must solve each question and answer within 4s\r\n");
+		printf("To crack the code and open the treasure chest, you must solve each question and answer within 4 Seconds!\r\n");
 		printf("Odd answer = Twist LEFT\r\n");
 		printf("Even answer = Twist RIGHT\r\n");
 		printf("Press ENTER to begin...\r\n");
