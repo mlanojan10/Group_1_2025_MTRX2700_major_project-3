@@ -6,6 +6,7 @@
 #include "riddles.h"
 #include "led.h"
 #include "potentiometer.h"
+#include "game_progress.h"
 
 volatile uint8_t game_progress = 0b0000;
 
@@ -19,7 +20,7 @@ void lidar_game(void) {
 void island4_game(void) {
     printf("Island 4: placeholder\r\n");
     delay_ms(2000);
-    game_progress |= 0b1000;
+    game_progress |= 0b0100;
 }
 
 
@@ -69,25 +70,26 @@ int main(void) {
             if (game_progress == 0b0000) {
                 lidar_game();
             } else {
-                printf("\r\nYou must complete the previous island first!\r\n");
+                printf("\r\nYou have already done this island!\r\n");
             }
         } else if (pa2 && !prev_pa2) {
             if (game_progress == 0b0001) {
                 riddle_game();
             } else {
-                printf("\r\nYou must complete the previous island first!\r\n");
+                printf("\r\nYou must complete the previous lidar island first!\r\n");
             }
         } else if (pa3 && !prev_pa3) {
-            if (game_progress == 0b0011) {
-                led_game();
+            if (game_progress == 0b0010) {
+                //led_game();
+            	island4_game();
             } else {
-                printf("\r\nYou must complete the previous island first!\r\n");
+                printf("\r\nYou must complete the previous riddle island first!\r\n");
             }
         } else if (pa4 && !prev_pa4) {
-            if (game_progress == 0b0111) {
+            if (game_progress == 0b0100) {
                 potentiometer_game();
             } else {
-                printf("\r\nYou cannot do this island!\r\n");
+                printf("\r\nYou must complete the LED isalnd!\r\n");
             }
         }
 

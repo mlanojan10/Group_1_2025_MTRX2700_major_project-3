@@ -1,8 +1,9 @@
 #include "stm32f303xc.h"
 #include "led.h"
 #include "uart.h"
+#include "game_progress.h"
 
-extern volatile uint8_t game_progress;
+
 
 void GPIO_Signal_Init(void) {
     // 1. Enable GPIOA clock
@@ -15,10 +16,14 @@ void GPIO_Signal_Init(void) {
     GPIOA->OSPEEDR |= (3 << (7 * 2));// High speed
     GPIOA->PUPDR &= ~(3 << (7 * 2)); // No pull-up/down
 
-    // 3. Configure PA6 as input
+   // Configure PA6 as input
     GPIOA->MODER &= ~(3 << (6 * 2)); // Input mode
-    GPIOA->PUPDR &= ~(3 << (6 * 2)); // No pull-up/down
+
+    // Enable internal pull-down on PA6
+    GPIOA->PUPDR &= ~(3 << (6 * 2)); // Clear
+    GPIOA->PUPDR |=  (2 << (6 * 2)); // Pull-down (10)
 }
+
 
 void led_game(void) {
     GPIO_Signal_Init();
@@ -37,14 +42,14 @@ void led_game(void) {
     // Output HIGH on PA7 to indicate module start
     GPIOA->ODR |= (1 << 7);
 
-    //printf("\r\nWaiting for signal on PA6 from other board...\r\n");//
+    printf("\r\nWaiting for signal on PA6 from other board...\r\n");//
 
-    // Wait until PA6 input goes HIGH
-    while (!(GPIOA->IDR & (1 << 6))) {
-        // Could include timeout or delay logic if needed
-    }
+	// Wait indefinitely until PA6 goes HIGH
+	while (!(GPIOA->IDR & (1 << 6))) {
+		// Constantly sampling PA6, do nothing until it's HIGH
+	}
 
-    // Input received
-    printf("\r\nYo-ho-ho! The LED trial be complete! Onwards to the next island if you dare \r\n");
-    game_progress |= 0b0100;
+	// Input received
+	printf("\r\nYo-ho-ho! The LED trial be complete! Onwards to the next island if you dare \r\n");
+	game_progress |= 0b0100;
 }

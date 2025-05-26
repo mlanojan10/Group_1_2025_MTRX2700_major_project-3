@@ -8,7 +8,8 @@
 #include "potentiometer.h"
 #include "stm32f303xc.h"
 
-extern volatile uint8_t game_progress;
+#include "game_progress.h"
+
 
 
 void InitialisePA1AsInput(void) {    //island LDR 1
@@ -117,7 +118,7 @@ void potentiometer_game(void) {
 
 		if (score == 10) {
 			printf("\r\n YOU WIN! The treasure is yours!\r\n");
-			game_progress |= 0b0010;  // Set bit 1 after success
+			game_progress |= 0b1000;  // Set bit 1 after success
 		}
 
 		printf("\r\nPress ENTER to try again...\r\n");

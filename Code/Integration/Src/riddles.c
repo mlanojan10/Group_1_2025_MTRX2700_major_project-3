@@ -5,6 +5,8 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include "stm32f303xc.h"
+#include "game_progress.h"
+
 
 typedef struct {
     const char *riddle;
@@ -22,7 +24,7 @@ static Riddle riddles[] = {
 #define NUM_RIDDLES (sizeof(riddles) / sizeof(Riddle))
 #define MAX_INPUT 64
 
-extern volatile uint8_t game_progress;
+
 
 static Riddle current_riddle = {0};
 static uint8_t riddle_step = 0; // 0: riddle, 1: math, 2: cipher
