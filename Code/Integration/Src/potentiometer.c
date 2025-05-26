@@ -12,10 +12,20 @@
 
 
 
-void InitialisePA1AsInput(void) {    //island LDR 1
-    RCC->AHBENR |= RCC_AHBENR_GPIOAEN;
-    GPIOA->MODER &= ~(3U << (1 * 2));
-    GPIOA->PUPDR &= ~(3U << (1 * 2));
+// === PIN INITIALISATION ===
+
+void InitialisePE11AsInput(void) {  // Replaces PE7 (formerly PC4 / PA11)
+    RCC->AHBENR |= RCC_AHBENR_GPIOEEN;
+    GPIOE->MODER &= ~(3U << (11 * 2));
+    GPIOE->PUPDR &= ~(3U << (11 * 2));
+    GPIOE->PUPDR |=  (2U << (11 * 2));  // Pull-down for stability
+}
+
+void InitialisePE9AsInput(void) {  // Still used (formerly PC5 / PA12)
+    RCC->AHBENR |= RCC_AHBENR_GPIOEEN;
+    GPIOE->MODER &= ~(3U << (9 * 2));
+    GPIOE->PUPDR &= ~(3U << (9 * 2));
+    GPIOE->PUPDR |=  (2U << (9 * 2));  // Pull-down for stability
 }
 
 void InitialisePA2AsInput(void) {    //island LDR 2
@@ -28,12 +38,6 @@ void InitialisePA3AsInput(void) {    //island LDR 3
     RCC->AHBENR |= RCC_AHBENR_GPIOAEN;
     GPIOA->MODER &= ~(3U << (3 * 2));
     GPIOA->PUPDR &= ~(3U << (3 * 2));
-}
-
-void InitialisePA4AsInput(void) {     //island LDR 4
-    RCC->AHBENR |= RCC_AHBENR_GPIOAEN;         // Enable GPIOA clock
-    GPIOA->MODER &= ~(3U << (4 * 2));          // Set PA5 as input (00)
-    GPIOA->PUPDR &= ~(3U << (4 * 2));          // No pull-up, pull-down
 }
 
 void InitialisePA5AsInput(void) {    //Potentiometer Input
