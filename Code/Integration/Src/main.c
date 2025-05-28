@@ -99,7 +99,7 @@ int main(void) {
         }
 
         // === Timeout Check ===
-        if (seconds_remaining == 0 && game_progress != 0b1111) {
+        if (seconds_remaining == 0 && game_progress != 0b10000) {
         	printf("\r\n Time’s up, matey! The treasure slips through yer fingers...\r\n");
         	while (1); // Game over — freeze or replace with reset logic
         }
