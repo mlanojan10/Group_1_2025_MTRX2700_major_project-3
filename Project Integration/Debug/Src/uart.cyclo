@@ -1,0 +1,6 @@
+../Src/uart.c:44:6:SerialInitialise	6
+../Src/uart.c:102:6:SerialOutputChar	2
+../Src/uart.c:112:6:SerialOutputString	2
+../Src/uart.c:127:9:SerialGetChar	2
+../Src/uart.c:134:6:SerialInputLine	4
+../Src/uart.c:153:9:SerialDataAvailable	1
