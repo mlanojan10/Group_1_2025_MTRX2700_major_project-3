@@ -46,6 +46,13 @@ void InitialisePA5AsInput(void) {    //Potentiometer Input
     GPIOA->PUPDR &= ~(3U << (5 * 2));
 }
 
+void InitialisePE7AsInput(void) {  //Riddle Button Input
+    RCC->AHBENR |= RCC_AHBENR_GPIOEEN;
+    GPIOE->MODER &= ~(3U << (7 * 2));
+    GPIOE->PUPDR &= ~(3U << (7 * 2));
+    GPIOE->PUPDR |=  (2U << (7 * 2));  // Pull-down for stability
+}
+
 void delay_ms(uint32_t ms);
 
 int __io_getchar(void);
@@ -122,7 +129,7 @@ void potentiometer_game(void) {
 
 		if (score == 10) {
 			printf("\r\n YOU WIN! The treasure is yours!\r\n");
-			//game_progress |= 0b1000;  // Set bit 1 after success
+			game_progress |= 0b1000;  // Set bit 1 after success
 		}
 
 		printf("\r\nPress ENTER to try again...\r\n");
@@ -133,3 +140,4 @@ void potentiometer_game(void) {
 	}
 
 }
+
