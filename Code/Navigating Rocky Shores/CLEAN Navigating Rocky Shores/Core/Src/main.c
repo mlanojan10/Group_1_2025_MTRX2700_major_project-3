@@ -41,7 +41,7 @@
 
 // Distance filtering
 #define DISTANCE_FILTER_SIZE      5
-#define NO_DETECTION_MM           400
+#define NO_DETECTION_MM           300
 #define NO_DETECTION_THRESHOLD    50
 #define NO_DETECTION_COUNT_LIMIT  3
 
