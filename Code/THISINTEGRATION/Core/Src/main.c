@@ -5,24 +5,15 @@
 #include "riddles.h"
 #include "led.h"
 #include "potentiometer.h"
+#include "buzzer.h"
+#include "motor.h"
 #include "game_progress.h"
-#include "timer.h"
 
 volatile uint8_t game_progress = 0b0000;
 
 // === GAME FUNCTIONS ===
 
-void lidar_game(void) {
-    printf("Island 3: placeholder\r\n");
-    delay_ms(2000);
-    game_progress |= 0b0001;
-}
 
-void island4_game(void) {
-    printf("Island 4: placeholder\r\n");
-    delay_ms(2000);
-    game_progress |= 0b0100;
-}
 
 // === IO FUNCTIONS ===
 
@@ -60,6 +51,8 @@ int main(void) {
     uint8_t prev_pa3  = 0;
     uint8_t prev_pe9  = 0;
 
+    printf("\r\r\n");
+    delay_ms(3000);
     printf("\r\n Ahoy ye, scallywag! Ye've set sail on the perilous path to treasure!\r\n");
     printf("Four cursed islands lie ahead, each holdin’ a test o’ wit, will, and courage.\r\n");
     printf("Touch the start position ‘n see if ye be brave enough to face Island 1... Yo ho ho!\r\n");
@@ -73,35 +66,34 @@ int main(void) {
         // Check for new press (rising edge)
         if (pe11 && !prev_pe11) {
             if (game_progress == 0b0000) {
-            	timer_init();
+            	printf("\r\nWelcome to the pirate ship!\r\n");
+            	printf("\r\nSteer your ship to avoid the obstacles!\r\n");
+            	printf("\r\nGOOOOO!!!!!\r\n");
                 lidar_game();
+                game_progress = 0b00001;
             } else {
-                printf("\r\nYou have already done this island!\r\n");
+                printf("\r\nYou cannot do this island!\r\n");
             }
         } else if (pa2 && !prev_pa2) {
             if (game_progress == 0b0001) {
                 riddle_game();
+                game_progress = 0b0010;
             } else {
-                printf("\r\nYou must complete the previous lidar island first!\r\n");
+                printf("\r\nYou cannot do this island!\r\n");
             }
         } else if (pa3 && !prev_pa3) {
             if (game_progress == 0b0010) {
-                island4_game();
+                led_game();
+                game_progress = 0b0100;
             } else {
-                printf("\r\nYou must complete the previous riddle island first!\r\n");
+                printf("\r\nYou cannot do this island!\r\n");
             }
         } else if (pe9 && !prev_pe9) {
             if (game_progress == 0b0100) {
                 potentiometer_game();
             } else {
-                printf("\r\nYou must complete the LED island!\r\n");
+                printf("\r\nYou cannot do this island!\r\n");
             }
-        }
-
-        // === Timeout Check ===
-        if (seconds_remaining == 0 && game_progress != 0b10000) {
-        	printf("\r\n Time’s up, matey! The treasure slips through yer fingers...\r\n");
-        	while (1); // Game over — freeze or replace with reset logic
         }
 
         // Save previous states
