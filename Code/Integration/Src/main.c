@@ -6,6 +6,7 @@
 #include "led.h"
 #include "potentiometer.h"
 #include "game_progress.h"
+#include "timer.h"
 
 volatile uint8_t game_progress = 0b0000;
 
@@ -72,6 +73,7 @@ int main(void) {
         // Check for new press (rising edge)
         if (pe11 && !prev_pe11) {
             if (game_progress == 0b0000) {
+            	timer_init();
                 lidar_game();
             } else {
                 printf("\r\nYou have already done this island!\r\n");
@@ -94,6 +96,12 @@ int main(void) {
             } else {
                 printf("\r\nYou must complete the LED island!\r\n");
             }
+        }
+
+        // === Timeout Check ===
+        if (seconds_remaining == 0 && game_progress != 0b1111) {
+        	printf("\r\n Time’s up, matey! The treasure slips through yer fingers...\r\n");
+        	while (1); // Game over — freeze or replace with reset logic
         }
 
         // Save previous states
