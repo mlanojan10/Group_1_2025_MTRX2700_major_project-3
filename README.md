@@ -46,8 +46,55 @@ Once you have completed this, you will be asked to answer a quick maths question
 
 
 ## Code Description
-### Lidar Module 
-#### Testing
+### Lidar Module
+#### Overview
+This module challenges the player to navigate "rocky shores" by using a joystick to pan and tilt a LIDAR-equipped platform. The player must manually scan for nearby obstacles. If an object is detected within 30 cm, a red LED alerts the user to steer away. Once clear, a green LED indicates safe passage.
+
+The LIDAR is mounted on a dual-servo pan-tilt unit (PTU), and its orientation is controlled in real-time via analog joystick input.
+
+#### Hardware Interface
+
+| Component   | STM32 Pin(s)     | Description                  |
+| ----------- | ---------------- | ---------------------------- |
+| Joystick X  | PC1 (ADC1\_IN3)  | Controls horizontal (pan)    |
+| Joystick Y  | PA4 (ADC2\_IN1)  | Controls vertical (tilt)     |
+| Pan Servo   | PA1 (TIM2\_CH2)  | PWM output                   |
+| Tilt Servo  | PA15 (TIM2\_CH1) | PWM output                   |
+| LIDAR (PWM) | PA8 (TIM1\_CH1)  | Pulse width encodes distance |
+| Red LED     | PA10             | ON when obstacle < 30 cm     |
+| Green LED   | PA9              | ON when no nearby obstacle   |
+
+#### Key Features
+- Smooth joystick-based PTU control using filtered ADC input mapped to servo PWM values.
+- PWM-based LIDAR distance measurement using input capture interrupt on TIM1.
+- Filtered distance reading via a rolling average over 5 samples.
+- LED feedback system for player awareness (safe vs. obstacle detected).
+- Failsafe logic to detect and handle missing LIDAR signals.
+
+#### Core Control Loop
+
+```
+while (1) {
+    read_joystick();              // Read ADC for pan & tilt
+    update_servo_pwm();          // Smooth movement toward target PWM
+    read_filtered_distance();    // Compute filtered LIDAR value
+    update_leds();               // Red/Green LED based on proximity
+    HAL_Delay(20);               // Maintain ~50Hz loop
+}
+```
+
+#### Testing 
+
+| Scenario                 | Expected Output                     |
+| ------------------------ | ----------------------------------- |
+| Object detected at 25 cm | Red LED ON, Green LED OFF           |
+| Clear space (>30 cm)     | Green LED ON, Red LED OFF           |
+| Joystick tilt            | LIDAR tilts up/down smoothly        |
+| Joystick pan             | LIDAR pans left/right smoothly      |
+| LIDAR signal dropout     | Reverts to default distance (300mm) |
+
+
+
 
 ### Riddle Module 
 ![Image](https://github.com/user-attachments/assets/328baa93-9c68-4ef6-bf3b-23cdceb6b2ea)
