@@ -129,7 +129,7 @@ void potentiometer_game(void) {
 
 		if (score == 10) {
 			printf("\r\n YOU WIN! The treasure is yours!\r\n");
-			game_progress |= 0b1000;  // Set bit 1 after success
+			//game_progress |= 0b1000;  // Set bit 1 after success
 		}
 
 		printf("\r\nPress ENTER to try again...\r\n");
