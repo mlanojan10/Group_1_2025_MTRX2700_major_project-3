@@ -228,7 +228,7 @@ void riddle_game(void) {
 
                     if (strcmp(input_buffer, expected_cipher) == 0) {
                         printf("\r\n\nWell done! You've completed the riddle island!\r\n");
-                        game_progress = 0b0010;
+                        //game_progress = 0b0010;
                         return;
                     } else {
                         printf("\r\n\nNot quite! Try the Caesar cipher again with a shift of %d.\r\n> ", math_answer);
