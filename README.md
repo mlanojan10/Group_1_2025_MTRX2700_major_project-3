@@ -26,8 +26,12 @@ This user guide will take you through the instructions of the game, and then we 
 ## Instructions of the Game 
 You have set sail to find the hidden treasure - but there are 4 challenges you must first complete before you get the gold! 
 
-### Navigating Roacky Shores 
-Getting to the treasure is not easy, and your first obstacle is steering clear of any obstacles and getting to the next island…
+### Navigating Rocky Shores 
+Reaching the treasure won’t be easy. Your first challenge is to guide your ship through treacherous waters filled with jagged rocks.
+
+You’ll have 90 seconds to steer past shifting obstacles and navigate your way to the next island. Precision and timing are key, or you’ll be dashed against the rocks like the many who came before.
+
+And this is only the beginning — you haven’t even reached the first island yet.
 
 ## Riddle Island 
 Woohoo! You have managed to get to the first island. To unlock a clue to the next island, you have to correctly answer a few mind boggling questions. 
