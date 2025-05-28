@@ -29,7 +29,7 @@ You have set sail to find the hidden treasure - but there are 4 challenges you m
 ### Navigating Roacky Shores 
 Getting to the treasure is not easy, and your first obstacle is steering clear of any obstacles and getting to the next island…
 
-### Riddle Island 
+## Riddle Island 
 Woohoo! You have managed to get to the first island. To unlock a clue to the next island, you have to correctly answer a few mind boggling questions. 
 
 You will be presented with one riddle that you need to answer correctly. Input your answer into the text box after reading the question. You do not need to worry about capatalising, just ensure your answer is spelt correctly. You will be able to request for a hint after a certain amount of time, but to do this, you need to locate the hidden button in the island. 
@@ -170,8 +170,107 @@ To test the functionality of the module, certain tests were conducted and compar
   </tbody>
 </table>
 
-### TSC Module 
-#### Testing
+### TSC Module
+#### Overview: 
+The Touch Sensing Control (TSC) module game allows players to interact with a 3D-printed ship helm with 8 touch sensors, mirroring the circular LED arrangement on the STM32F3Discovery board. The game begins upon receiving a HIGH signal from a master board. A pattern of 6 LEDs illuminates to form a sequence, which the player must memorize and replicate by touching the corresponding helm sensors. A blinking blue LED indicates when a sensor should be touched. The win condition is a correctly replicated sequence where a green LED is activated and a high signal is sent back to the master board. A lose condition is an error in sequence or timing when the touch sensors are touched which is indicated on a red LED and the game is repeated. 
+
+The flow summary is as follows:
+- LED pattern shown → user observes
+- Blue LED blinks for each sensor → user must touch at that moment
+- TSC reads touch sensor values → mapped to LED pattern
+- Compare user touches to correct pattern 
+- Green LED + HIGH signal if match, Red LED + repeat if not
+
+#### Main (`main.c`):
+The main loop initialises HAL, system clocks, GPIO, TSC peripherals and UART on USART1 for debugging. It is the entry point to the module so it includes only public headers. Internal hardware configurations and low-level TSC logic are encapsulated in game.c and led_control.c for the purpose of effective encapsulation. 
+The main logic waits for a HIGH signal on PD4 from the master board to call `StartMiniGame(&htsc)` from game.c which begins the game and manages the gameplay logic. 
+`if (GPIOD->IDR & (1 << 4))  // Check PD4 HIGH
+       {
+           StartMinigame(&htsc);
+           break; 
+       }`
+
+
+The TSC groups were configured according the following pins in the system core:
+
+#### LED Control (led.c):
+The LED control file is responsible for creating the flashing sequence where one LED at a time blinks on and off, guiding the player. Specifically, it manages initialising the LEDs on GPIOE pins 8-15 and is responsible for displaying the circular LED pattern to the STM using `LED_DisplayPattern(pattern, PATTERN_LENGTH, 400)` which is called at the beginning of `StartMiniGame`. Pattern is a pointer to an array of 'uint8_t' values, where each value represents the index of an LED to activate. It is a constant to ensure that the pattern inside the game.c function (which is declared as static) cannot be altered to preserve the integrity of the game. 
+
+#### Gameplay (game.c):
+`StartMinigame(TSC_HandleTypeDef *htsc)` in game.c is the main game loop handling pattern playback, touch input and result checking. It uses TSC hardware register access configured using HAL in main.c for precise touch sampling, maps the LED indices to TSC groups for input verification, provides visual (LEDs) feedback and HIGH signalling. The pseudo code below describes the logic process:
+
+Call `LED_Displaypatternv to display predefined pattern (`pattern[] = = {0,2,4,1,5,7}`)
+Loop over pattern of length 6 
+Convert LED index (`pattern[i]`) to corresponding TSC group index
+Increment to skip problematic TSC groups (4,7) 
+Configure TSC to enable current capacitive touch electrode for sampling
+Start acquisition
+Wait for End of Acquisition Flag 
+Reads raw capacitive sensor value 
+Compares to threshold where touch detected if below threshold
+Records user response, either correct or 0xFF for a miss
+Blue LED (PC7) blinks to indicate when user should touch
+If user_input is the correct pattern (success), light green (PC9), send HIGH (PD3) and exit loop
+Else light red (PC8)'
+
+#### How the touch detection pattern mapping works:
+1: Pattern Playback (LEDs)
+- `pattern[] = {0,2,4,1,5,7}` defines a sequence of LEDs to light up.
+- Each `pattern[i]` corresponds to a touch sensor on the helm (via TSC group mapping).
+
+2: TSC Group Mapping
+- TSC groups are numbered 1–8.
+- Each group corresponds to a specific touch electrode/sensor (matching the physical helm).
+- To convert an LED index to TSC group: `group = pattern[i] + 1` (adjusted to skip groups 4,7).
+- For example:
+  - `pattern[0]=0` → `group=1`
+  - `pattern[1]=2` → `group=3`
+  - `pattern[2]=4` → `group=5`
+
+3️: Touch Detection Logic
+- During each step:
+  - The system enables only one TSC group (matching the pattern).
+  - The user must touch the correct sensor when the blue LED blinks.
+  - `HAL_TSC_GroupGetValue()` reads the capacitive value.
+  - If the value is less than the threshold, it counts as a valid touch.
+
+4️: Pattern Matching
+- `Game_CheckPattern(correct_pattern, user_input, length)` compares each entry:
+`c
+for (uint8_t i = 0; i < length; i++) {
+    if (correct_pattern[i] != user_input[i]) return false;
+}`
+  - If any sensor was not touched correctly or at the right time `user_input[i] = 0xff` and mismatch occurs 
+  - Success means the player replicated the pattern in the correct sequence and timing
+
+
+#### Output for debugging when connected to laptop via USART1: 
+`Received
+Touch Sensor Test Starting
+Watch the LEDs closely and touch the sensors in the same pattern.
+You have two seconds per sensor.
+Group 1 raw: 2823
+Group 3 raw: 2509
+Group 5 raw: 951
+Group 2 raw: 1439
+Group 6 raw: 1762
+Group 8 raw: 2910
+Wrong pattern. Restarting…
+
+Group 1 raw: 1287
+Group 1 TOUCHED!
+Group 3 raw: 1204
+Group 3 TOUCHED!
+Group 5 raw: 714
+Group 5 TOUCHED!
+Group 2 raw: 984
+Group 2 TOUCHED!
+Group 6 raw: 1015
+Group 6 TOUCHED!
+Group 8 raw: 1296
+Group 8 TOUCHED!
+Correct pattern! You win!`
+
 
 
 ### Potentiometer Module 
