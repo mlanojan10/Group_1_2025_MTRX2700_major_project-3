@@ -10,6 +10,7 @@ void InitialisePA2AsInput(void);
 void InitialisePA3AsInput(void);
 void InitialisePE9AsInput(void);
 void InitialisePA5AsInput(void);
+void InitialisePE7AsInput(void);
 
 
 #endif
