@@ -6,7 +6,7 @@
 - **Sharon Britto**  
   Responsible for Riddle & Intergation Module. Wrote code and user instructions.
 
-  - **Lillie Mellin**  
+- **Lillie Mellin**  
   Responsible for TSC Module. Wrote code and user instructions.
 
 - **Luc Do**  
