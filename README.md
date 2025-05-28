@@ -47,6 +47,7 @@ Once you have completed this, you will be asked to answer a quick maths question
 
 ### Riddle Module 
 ![Image](https://github.com/user-attachments/assets/328baa93-9c68-4ef6-bf3b-23cdceb6b2ea)
+
 This module constructs an interactive riddle game utilsizing UART communication to interact with the user via a serial terminal. The gameplay consists of three stages: answering a riddle, solving a basic math problem, and applying a Caesar cipher. The riddle is selected randomly from a predefined array of Riddle structs, wcih contans the riddle,its answer and two hints, and the player must respond correctly to proceed to the next stage.The game flow is managed within the riddle_game() function, which contains the main loop that processes user input and tracks progression through each challenge step. The functionality is controlled by if-else statements and while loops as its basis. 
 
 Key supporting functions include AskNewRiddle(), which selects and displays a random riddle; AskMathQuestion(), which generates a simple addition problem; and AskCaesarChallenge(), which prompts the user to encode the riddle’s answer using a Caesar cipher. The Caesar cipher logic itself is implemented in CaesarCipher(), which shifts each character in the input string by a specified amount, defined by the generated math answer. Controls are placed within both AskNewRiddle() and AskMathQuestion() function that ensures no two riddles are the same and the sum is not 0:
@@ -104,7 +105,7 @@ To test the functionality of the module, certain tests were conducted and compar
   </thead>
   <tbody>
     <tr>
-      <td rowspan="7">Riddle</td>
+      <td rowspan="8">Riddle</td>
       <td>answer &gt; 45 seconds</td>
       <td>Correct! On to the next challenge…<br>Now answer this: What is 4 + 2?</td>
     </tr>
@@ -134,9 +135,8 @@ To test the functionality of the module, certain tests were conducted and compar
     </tr>
     <tr>
       <td>PE7 low &gt; 45 seconds</td>
-      <td colspan="2">There's a button hidden on this island. Find it and gain a hint!</td>
+      <td>There's a button hidden on this island. Find it and gain a hint!</td>
     </tr>
-
     <tr>
       <td rowspan="4">Math Question</td>
       <td>6</td>
@@ -154,7 +154,6 @@ To test the functionality of the module, certain tests were conducted and compar
       <td>HellO</td>
       <td>Incorrect. What is 4 + 2?</td>
     </tr>
-
     <tr>
       <td rowspan="3">Caesar Cipher</td>
       <td>ceaser</td>
@@ -273,7 +272,6 @@ To test the functionality of the system, the expected outcomes were compared to 
       <td>PA2, PA3, PE9</td>
       <td>You cannot do this island!</td>
     </tr>
-
     <tr>
       <td rowspan="2">0b0001</td>
       <td>PE11</td>
@@ -288,7 +286,6 @@ To test the functionality of the system, the expected outcomes were compared to 
       <td>PE11, PA3, PE9</td>
       <td>You cannot do this island!</td>
     </tr>
-
     <tr>
       <td rowspan="2">0b0010</td>
       <td>PA3</td>
@@ -298,7 +295,6 @@ To test the functionality of the system, the expected outcomes were compared to 
       <td>PE11, PA2, PE9</td>
       <td>You cannot do this island!</td>
     </tr>
-
     <tr>
       <td rowspan="2">0b0100</td>
       <td>PE9</td>
@@ -308,13 +304,11 @@ To test the functionality of the system, the expected outcomes were compared to 
       <td>PE11, PA32, PA3</td>
       <td>You cannot do this island!</td>
     </tr>
-
     <tr>
       <td>0b1000</td>
       <td>PE11, PA32, PA3, PE9</td>
       <td>No response</td>
     </tr>
-
     <tr>
       <td>Any</td>
       <td>PE11 held for 2 seconds</td>
