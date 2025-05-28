@@ -19,7 +19,7 @@
  Responsible for Timer Module. Wrote code and user instructions.
 
 
-# Pirates of the C-ribbean
+![Image](https://github.com/user-attachments/assets/46e8d0d3-676f-463e-9957-3b139e92b115)
 Hi Adventurer! Welcome to the Islands of Treasure! 
 This user guide will take you through the instructions of the game, and then we will dive deeper into what makes up its functionality. 
 
