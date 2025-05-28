@@ -184,14 +184,26 @@ The flow summary is as follows:
 #### Main (`main.c`):
 The main loop initialises HAL, system clocks, GPIO, TSC peripherals and UART on USART1 for debugging. It is the entry point to the module so it includes only public headers. Internal hardware configurations and low-level TSC logic are encapsulated in game.c and led_control.c for the purpose of effective encapsulation. 
 The main logic waits for a HIGH signal on PD4 from the master board to call `StartMiniGame(&htsc)` from game.c which begins the game and manages the gameplay logic. 
-`if (GPIOD->IDR & (1 << 4))  // Check PD4 HIGH
+```
+if (GPIOD->IDR & (1 << 4))  // Check PD4 HIGH
        {
            StartMinigame(&htsc);
            break; 
        }`
-
+```
 
 The TSC groups were configured according the following pins in the system core:
+| Group | Sampling (G#_IO3) | Resistor (G#_IO2) | Empty (G#_IO4) |
+|-------|-------------------|-------------------|----------------|
+| 1     | PA2               | PA1               | PA3            |
+| 2     | PA6               | PA5               | PA7            |
+| 3     | PB1               | PB0               | PB2            |
+| 4     | PA13              | PA10              | PA14           |
+| 5     | PB6               | PB4               | PB7            |
+| 6     | PB13              | PB12              | PB14           |
+| 7     | PE7               | PE3               | PE5            |
+| 8     | PD14              | PD13              | PD15           |
+
 
 #### LED Control (led.c):
 The LED control file is responsible for creating the flashing sequence where one LED at a time blinks on and off, guiding the player. Specifically, it manages initialising the LEDs on GPIOE pins 8-15 and is responsible for displaying the circular LED pattern to the STM using `LED_DisplayPattern(pattern, PATTERN_LENGTH, 400)` which is called at the beginning of `StartMiniGame`. Pattern is a pointer to an array of 'uint8_t' values, where each value represents the index of an LED to activate. It is a constant to ensure that the pattern inside the game.c function (which is declared as static) cannot be altered to preserve the integrity of the game. 
@@ -236,16 +248,19 @@ Else light red (PC8)'
 
 4️: Pattern Matching
 - `Game_CheckPattern(correct_pattern, user_input, length)` compares each entry:
-`c
+```
+c
 for (uint8_t i = 0; i < length; i++) {
     if (correct_pattern[i] != user_input[i]) return false;
-}`
+}
+```
   - If any sensor was not touched correctly or at the right time `user_input[i] = 0xff` and mismatch occurs 
   - Success means the player replicated the pattern in the correct sequence and timing
 
 
 #### Output for debugging when connected to laptop via USART1: 
-`Received
+```
+Received
 Touch Sensor Test Starting
 Watch the LEDs closely and touch the sensors in the same pattern.
 You have two seconds per sensor.
@@ -269,7 +284,8 @@ Group 6 raw: 1015
 Group 6 TOUCHED!
 Group 8 raw: 1296
 Group 8 TOUCHED!
-Correct pattern! You win!`
+Correct pattern! You win!
+```
 
 
 
