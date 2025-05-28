@@ -198,10 +198,8 @@ The TSC groups were configured according the following pins in the system core:
 | 1     | PA2               | PA1               | PA3            |
 | 2     | PA6               | PA5               | PA7            |
 | 3     | PB1               | PB0               | PB2            |
-| 4     | PA13              | PA10              | PA14           |
 | 5     | PB6               | PB4               | PB7            |
 | 6     | PB13              | PB12              | PB14           |
-| 7     | PE7               | PE3               | PE5            |
 | 8     | PD14              | PD13              | PD15           |
 
 
