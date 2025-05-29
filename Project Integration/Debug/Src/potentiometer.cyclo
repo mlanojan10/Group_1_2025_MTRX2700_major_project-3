@@ -1,0 +1,6 @@
+../Src/potentiometer.c:17:6:InitialisePE11AsInput	1
+../Src/potentiometer.c:24:6:InitialisePE9AsInput	1
+../Src/potentiometer.c:31:6:InitialisePA2AsInput	1
+../Src/potentiometer.c:37:6:InitialisePA3AsInput	1
+../Src/potentiometer.c:43:6:InitialisePA5AsInput	1
+../Src/potentiometer.c:54:6:potentiometer_game	15

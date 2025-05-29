@@ -1,0 +1,4 @@
+/Users/j_yang82/Desktop/MTRX2700-2025/stm32f303-definitions/Core/Inc/core_cm4.h:1688:22:__NVIC_EnableIRQ	16	static
+/Users/j_yang82/Desktop/MTRX2700-2025/stm32f303-definitions/Core/Inc/core_cm4.h:1816:22:__NVIC_SetPriority	16	static
+../Src/timer.c:9:6:timer2_init	8	static
+../Src/timer.c:20:6:TIM2_IRQHandler	8	static
