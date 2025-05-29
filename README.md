@@ -416,7 +416,6 @@ Pin Mapping:
 | LED 7 (Leftmost)       | PE   | 8    | Countdown LED                            |
 | LED X (Timer Start)    | PE   | 7    | ON when timer starts, OFF at end         |
 | LED Y (Timer End)      | PE   | 6    | OFF initially, ON when timer completes   |
-| UART TX (USART1 TX)    | PA   | 9    | Serial output for countdown timer        |
 
 The timer ticks every second using TIM2, with a blinking effect on the current countdown LED. All logic and hardware abstraction are modularised across gpio.c, timer.c, and uart.c to maintain clarity and reusability.
 
