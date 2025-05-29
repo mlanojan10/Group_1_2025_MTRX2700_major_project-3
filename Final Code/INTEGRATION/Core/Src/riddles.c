@@ -8,14 +8,14 @@
 #include "game_progress.h"
 #include "main.h"
 
-typedef struct {
+typedef struct {  //definitions of struct 
     const char *riddle;
     const char *answer;
     const char *hint1;
     const char *hint2;
 } Riddle;
 
-static Riddle riddles[] = {
+static Riddle riddles[] = { //riddle from struct with corresponding hints and answers
     {
         "I follow you all the time and copy your every move, but you can’t touch me or catch me. What am I?",
         "shadow",
@@ -48,14 +48,15 @@ static Riddle riddles[] = {
     }
 };
 
-#define NUM_RIDDLES (sizeof(riddles) / sizeof(Riddle))
+#define NUM_RIDDLES (sizeof(riddles) / sizeof(Riddle)) 
 #define MAX_INPUT 64
 
 
 
 static Riddle current_riddle = {0};
 static uint8_t riddle_step = 0; // 0: riddle, 1: math, 2: cipher
-static int math_1 = 0;
+//varibale to store maths rumbers 
+static int math_1 = 0; 
 static int math_2 = 0;
 static int math_answer = 0;
 
@@ -72,15 +73,15 @@ int __io_getchar(void);
 volatile uint32_t millis = 0;
 
 
-
+//clock for button timer - this is not used 
 void SysTick_Init(void) {
     SysTick_Config(SystemCoreClock / 1000);  // 1 ms tick
 }
 
-
+//this takes the user input and comverts all caharcters to lowercase letters 
 static void ToLowerCase(char *str) {
     while (*str) {
-        *str = tolower((unsigned char)*str);
+        *str = tolower((unsigned char)*str); //lowercase 
         str++;
     }
 }
