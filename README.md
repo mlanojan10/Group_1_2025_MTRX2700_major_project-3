@@ -43,9 +43,25 @@ You will be presented with one riddle that you need to answer correctly. Input y
 Once you have completed this, you will be asked to answer a quick maths questions. You will then need to apply a Ceaser Cipher shift of this value to the last riddle answer you had. Completing all these challenges unlocks a further island, and a step closer to the treasure!
 
 ### Blinking Light Shores 
+Hi Matey, this is a test of your wit and your coordination. 
+
+An LED pattern of length 6 will be displayed. Remember the order. These 8 LEDs on the STM correspond to the 8 sensor positions on the helm exactly. 
+
+After the LED pattern is displayed touch the sensors on the helm in the correct pattern. You must be touching the sensor by the time the blue light flashes!!
+
+Move quickly between sensors. 
+
+A tip from one pirate to another: make sure you're touching the first sensor by the time the LED pattern stops as ships are unruly creatures and setting sail is the hardest part!
+
 
 ### Treasure Island
+Ahoy! You've found the treasure chest, but its locked! There is a mysterious dial on the ground.
 
+1. Maths questions will be printed to the screen, you must solve them with pirate speed!
+2. Note whether the answer to the question is odd or even.
+3. If the answer is odd, twist ye dial to the left (red LED will light)
+4. If the answer is even, twist ye dial to the right (green LED will light)
+5. Get all the questions right, and the treasure is yours!!! Arrggggh!!!
 
 ## Code Description
 ### Lidar Module
