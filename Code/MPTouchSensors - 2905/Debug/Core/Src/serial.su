@@ -1,0 +1,7 @@
+../Core/Src/serial.c:60:6:SerialInitialise	32	static
+../Core/Src/serial.c:119:6:SerialOutputChar	16	static
+../Core/Src/serial.c:128:6:SerialOutputString	24	static
+../Core/Src/serial.c:143:9:SerialReceiveChar	24	static
+../Core/Src/serial.c:164:6:SerialOutputBuffer	32	static
+../Core/Src/serial.c:183:10:SerialInputPacketHeader	24	static
+../Core/Src/serial.c:215:10:SerialInputDataPacket	32	static

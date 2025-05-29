@@ -1,0 +1,6 @@
+../Core/Src/game.c:18:24:touch_threshold	16	static
+../Core/Src/game.c:26:9:read_touch_sensor_debug	88	static
+../Core/Src/game.c:79:6:StartMinigame	112	static
+../Core/Src/game.c:156:6:Game_ShowInstructions	16	static
+../Core/Src/game.c:162:6:Game_ShowResult	16	static
+../Core/Src/game.c:180:6:Game_CheckPattern	32	static

@@ -1,0 +1,4 @@
+../Core/Src/user_interface.c:8:6:UI_PrintWelcomeMessage	1
+../Core/Src/user_interface.c:13:6:UI_PrintFailureMessage	1
+../Core/Src/user_interface.c:17:6:UI_PrintSuccessMessage	1
+../Core/Src/user_interface.c:21:6:UI_PrintPrompt	1
