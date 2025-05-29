@@ -1,0 +1,2 @@
+../Core/Src/led.c:8:6:GPIO_Signal_Init	1
+../Core/Src/led.c:28:6:led_game	4

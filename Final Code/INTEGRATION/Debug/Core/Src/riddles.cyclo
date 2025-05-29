@@ -1,0 +1,9 @@
+../Core/Inc/core_cm4.h:1816:22:__NVIC_SetPriority	2
+../Core/Inc/core_cm4.h:2022:26:SysTick_Config	2
+../Core/Src/riddles.c:76:6:SysTick_Init	1
+../Core/Src/riddles.c:81:13:ToLowerCase	3
+../Core/Src/riddles.c:89:13:CaesarCipher	4
+../Core/Src/riddles.c:103:13:AskNewRiddle	2
+../Core/Src/riddles.c:122:13:AskMathQuestion	2
+../Core/Src/riddles.c:133:13:AskCaesarChallenge	1
+../Core/Src/riddles.c:139:6:riddle_game	18

@@ -1,0 +1,8 @@
+../Core/Src/motor.c:8:6:motor_init	4	static
+../Core/Src/motor.c:42:6:motor_set_angle	24	static
+../Core/Src/motor.c:51:6:motor_set_pulse	16	static
+../Core/Src/motor.c:58:6:motor_open	8	static
+../Core/Src/motor.c:62:6:motor_close	8	static
+../Core/Src/motor.c:65:6:motor_start_forward	8	static
+../Core/Src/motor.c:69:6:motor_start_reverse	8	static
+../Core/Src/motor.c:73:6:motor_stop	8	static

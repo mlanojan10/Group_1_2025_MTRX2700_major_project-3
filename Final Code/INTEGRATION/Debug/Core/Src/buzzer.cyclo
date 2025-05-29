@@ -1,0 +1,7 @@
+../Core/Src/buzzer.c:4:6:buzzer_init	1
+../Core/Src/buzzer.c:31:6:buzzer_on	1
+../Core/Src/buzzer.c:35:6:buzzer_off	1
+../Core/Src/buzzer.c:38:6:buzzer_set_frequency	1
+../Core/Src/buzzer.c:49:6:siren_sound	5
+../Core/Src/buzzer.c:61:6:fail_sound	4
+../Core/Src/buzzer.c:70:6:pirate_sound	86

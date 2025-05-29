@@ -1,0 +1,15 @@
+../Core/Src/lidar.c:89:5:map	24	static
+../Core/Src/lidar.c:94:10:get_filtered_distance	16	static
+../Core/Src/lidar.c:103:6:enable_clocks	4	static
+../Core/Src/lidar.c:108:6:initialise_board	16	static
+../Core/Src/lidar.c:146:6:HAL_TIM_IC_CaptureCallback	32	static
+../Core/Src/lidar.c:200:6:lidar_game	32	static
+../Core/Src/lidar.c:310:6:SystemClock_Config	128	static
+../Core/Src/lidar.c:347:13:MX_ADC1_Init	128	static
+../Core/Src/lidar.c:387:13:MX_ADC2_Init	64	static
+../Core/Src/lidar.c:410:13:MX_I2C1_Init	48	static
+../Core/Src/lidar.c:431:13:MX_TIM1_Init	104	static
+../Core/Src/lidar.c:470:13:MX_TIM2_Init	104	static
+../Core/Src/lidar.c:504:13:MX_USB_PCD_Init	16	static
+../Core/Src/lidar.c:522:13:MX_GPIO_Init	48	static
+../Core/Src/lidar.c:592:6:Error_Handler	4	static,ignoring_inline_asm

@@ -1,0 +1,9 @@
+../Core/Inc/core_cm4.h:1816:22:__NVIC_SetPriority	16	static
+../Core/Inc/core_cm4.h:2022:26:SysTick_Config	16	static
+../Core/Src/riddles.c:76:6:SysTick_Init	8	static
+../Core/Src/riddles.c:81:13:ToLowerCase	24	static
+../Core/Src/riddles.c:89:13:CaesarCipher	32	static
+../Core/Src/riddles.c:103:13:AskNewRiddle	24	static
+../Core/Src/riddles.c:122:13:AskMathQuestion	8	static
+../Core/Src/riddles.c:133:13:AskCaesarChallenge	8	static
+../Core/Src/riddles.c:139:6:riddle_game	96	static

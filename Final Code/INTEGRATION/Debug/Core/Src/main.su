@@ -1,0 +1,6 @@
+../Core/Src/main.c:21:5:__io_putchar	16	static
+../Core/Src/main.c:26:5:__io_getchar	8	static
+../Core/Src/main.c:30:6:delay_ms	24	static
+../Core/Src/main.c:36:6:Initialise_All	8	static
+../Core/Src/main.c:46:6:SystemClock_HSI_8MHz	4	static
+../Core/Src/main.c:70:5:main	16	static

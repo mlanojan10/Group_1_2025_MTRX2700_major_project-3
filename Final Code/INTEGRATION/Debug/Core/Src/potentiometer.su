@@ -1,0 +1,7 @@
+../Core/Src/potentiometer.c:17:6:InitialisePE11AsInput	4	static
+../Core/Src/potentiometer.c:24:6:InitialisePE9AsInput	4	static
+../Core/Src/potentiometer.c:31:6:InitialisePA2AsInput	4	static
+../Core/Src/potentiometer.c:37:6:InitialisePA3AsInput	4	static
+../Core/Src/potentiometer.c:43:6:InitialisePA5AsInput	4	static
+../Core/Src/potentiometer.c:49:6:InitialisePE7AsInput	4	static
+../Core/Src/potentiometer.c:61:6:potentiometer_game	40	static

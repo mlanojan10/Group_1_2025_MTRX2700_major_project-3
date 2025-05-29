@@ -1,0 +1,7 @@
+../Core/Src/buzzer.c:4:6:buzzer_init	4	static
+../Core/Src/buzzer.c:31:6:buzzer_on	4	static
+../Core/Src/buzzer.c:35:6:buzzer_off	4	static
+../Core/Src/buzzer.c:38:6:buzzer_set_frequency	32	static
+../Core/Src/buzzer.c:49:6:siren_sound	24	static
+../Core/Src/buzzer.c:61:6:fail_sound	24	static
+../Core/Src/buzzer.c:70:6:pirate_sound	352	static
