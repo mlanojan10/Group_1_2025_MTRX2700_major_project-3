@@ -71,15 +71,15 @@ uint8_t read_touch_sensor_debug(void)
             snprintf(uart_msg, sizeof(uart_msg), "Group %d TOUCHED!\r\n", group);
             SerialOutputString((uint8_t *)uart_msg, &USART1_PORT);
 
-            // Return the touched group (if you want to exit on first touch)
+            // Return the touched group 
             return group;
         }
     }
 
-    // Return 0 if no touch detected (optional)
+    // Return 0 if no touch detected 
     return 0;
 }
-
+// pointer to TSC_HandleTypeDef part of stm HAL containing TSC peripheral configuration data
 void StartMinigame(TSC_HandleTypeDef *htsc) {
     LED_Init();
     UI_PrintWelcomeMessage();
