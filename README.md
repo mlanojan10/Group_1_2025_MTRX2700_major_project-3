@@ -418,6 +418,7 @@ Further, an STM LED PE8 was configured as an output within the code, turning on 
 
 
 ### Timer Module 
+![Timer](Timer_diagram.png)
 #### Overview:
 The Timer LED module implements a countdown timer (default: 480 seconds) using STM32F3Discovery's onboard GPIO LEDs and UART. The timer begins automatically upon startup and updates the LED strip (PE8–PE15) to visually indicate progress. Two additional LEDs—LED X and LED Y (PE7 and PE6)—indicate the start and end of the timer respectively. LED X turns on immediately to signal the beginning, and LED Y lights up at timeout. UART1 (TX: PA9) is used to display the time in mm:ss format on a connected terminal for debugging and tracking.
 
