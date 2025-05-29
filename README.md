@@ -361,7 +361,40 @@ Correct pattern! You win!
 
 
 ### Potentiometer Module 
+### Overview:
+The potentiometer game is a test of the players quick maths skills, as questions are rapid fired from the GUI interface, and the user responds via the turning of a physical potentiometer on the island. After the game begins in the overall flow logic (LDR signal sent), the game initialises and prints instructions to the screen. Five addition questions are sent one by one, and for odd answers the user has to twist the potentiometer left (sending a low voltage to the STM via a comparator circuit), or twist right for even answers (high voltage). If the player gets each question right, the game ramps up in difficulty, switching to multiplication for the final 5 questions. There is a period of 4s between the code asking the question and checking the users answers, so you have to be quick!
+
+### Main file (main.c):
+Within the main file, only two functions from potentiometer.c are exposed:
+-	potentiometer_game();
+-	InitialisePA5AsInput();
+
+The initialise function is called along with a number of other pin initialisations used in other modules, via an overarching function in main called initialise_all(). For this module, the pin initialisation simply configured GPIOA, then set pin PA5 to receive high or low signal as input. This signal was then implemented into the game logic.
+
+The function potentiometer_game() was the only other function exposed via the header, which meant the entire game remained very modular and protected. The calling of that one function then ran the rest of the game, with the logic hidden away in potentiometer.c.
+
+### Potentiometer.c file:
+
+This file contained the primary gameplay and logic to run the game. The following are key aspects of the code.
+
+1: Use of TIM2 Timer
+- Upon startup of the game, the timer TIM2 was configured and started
+- Due to the game requiring user input to start ("Press enter to start"), the timer was guaranteed to be be at a different value for each iteration of the game
+- The rand() function was used for the generation of the maths questions, and the timer was used via ```srand(TIM2->CNT);```
+
+2: User instructions
+- Following the timer configuration, a number of welcome and instruction messages are printed to the terminal 
+- The game requires user input to the terminal ("Press enter to start"), where the system checks for the '/r' or '/n' characters before beginning the game
+
+3: Gameplay
+- An if statement is used to check the number of questions that have been asked, then either an addition or multiplication question is asked
+- PA5 is checked for high or low signal, and this determines whether the play loses and restarts the game, or continues
+- If all 10 questions are answered correctly, the screen prints "You win!!!" and the main.c logic moves to the game completion stage (e.g chest opening via motor)
+
 #### Testing
+
+To test the effectiveness of this module, the first debugging step was to add LED's in series with the comparator output, wired so that one would light when the output was low, and one when it was high.
+
 
 
 
