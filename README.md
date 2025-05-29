@@ -393,7 +393,14 @@ This file contained the primary gameplay and logic to run the game. The followin
 
 #### Testing
 
-To test the effectiveness of this module, the first debugging step was to add LED's in series with the comparator output, wired so that one would light when the output was low, and one when it was high.
+To test the effectiveness of this module, the first debugging step was to add LED's in series with the comparator output, wired so that one would light when the output was low, and one when it was high. This allowed us to visualise the working comparator, and debug the code independently without worrying about loose connections. 
+
+Further, an STM LED PE8 was configured as an output within the code, turning on when the input was high and off when it was low. This furthered the debugging by showing that the STM input was recieving correctly, and the signal was ready to be implemented into the code.
+
+| Scenario                 | Expected Output                       |
+| ------------------------ | -----------------------------------   |
+| Potentiometer twist left | Red LED ON, Green LED OFF, STM LED OFF|
+| Potentiometer twist right| Green LED ON, Red LED OFF, STM LED ON |
 
 
 
