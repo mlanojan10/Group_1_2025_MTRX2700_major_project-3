@@ -345,7 +345,7 @@ Correct pattern! You win!
 
 ### Timer Module 
 #### Overview:
-The Timer LED module implements a countdown timer (default: 80 seconds) using STM32F3Discovery's onboard GPIO LEDs and UART. The timer begins automatically upon startup and updates the LED strip (PE8–PE15) to visually indicate progress. Two additional LEDs—LED X and LED Y (PE7 and PE6)—indicate the start and end of the timer respectively. LED X turns on immediately to signal the beginning, and LED Y lights up at timeout. UART1 (TX: PA9) is used to display the time in mm:ss format on a connected terminal for debugging and tracking.
+The Timer LED module implements a countdown timer (default: 480 seconds) using STM32F3Discovery's onboard GPIO LEDs and UART. The timer begins automatically upon startup and updates the LED strip (PE8–PE15) to visually indicate progress. Two additional LEDs—LED X and LED Y (PE7 and PE6)—indicate the start and end of the timer respectively. LED X turns on immediately to signal the beginning, and LED Y lights up at timeout. UART1 (TX: PA9) is used to display the time in mm:ss format on a connected terminal for debugging and tracking.
 
 The timer ticks every second using TIM2, with a blinking effect on the current countdown LED. All logic and hardware abstraction are modularised across gpio.c, timer.c, and uart.c to maintain clarity and reusability.
 
