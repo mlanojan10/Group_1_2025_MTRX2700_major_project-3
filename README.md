@@ -31,7 +31,7 @@ Reaching the treasure won’t be easy. Your first challenge is to guide your shi
 
 You’ll have to steer past shifting obstacles and navigate your way to the next island for 90 seconds. Precision and timing are key, or you’ll be dashed against the rocks like the many who came before.
 
-For each rock that faces your path, you have 10 seconds to make the LEDs indicate green to show you've successfully veered from capsizing.
+For each rock that faces your path, you will have 10 seconds to make the LEDs indicate green to show you've successfully veered from capsizing.
 
 And this is only the beginning — you haven’t even reached the first island yet.
 
