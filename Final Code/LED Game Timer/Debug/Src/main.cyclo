@@ -1,0 +1,11 @@
+/Users/j_yang82/Desktop/MTRX2700-2025/stm32f303-definitions/Core/Inc/core_cm4.h:1688:22:__NVIC_EnableIRQ	2
+/Users/j_yang82/Desktop/MTRX2700-2025/stm32f303-definitions/Core/Inc/core_cm4.h:1816:22:__NVIC_SetPriority	2
+../Src/main.c:30:6:uart_init	1
+../Src/main.c:42:6:uart_send_char	2
+../Src/main.c:47:6:uart_send_string	2
+../Src/main.c:51:6:uart_send_time	1
+../Src/main.c:60:6:timer2_init	1
+../Src/main.c:72:6:gpio_init	2
+../Src/main.c:94:6:update_LEDs	6
+../Src/main.c:121:6:TIM2_IRQHandler	3
+../Src/main.c:140:5:main	1
