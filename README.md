@@ -344,8 +344,88 @@ Correct pattern! You win!
 
 
 ### Timer Module 
-#### Testing
+#### Overview:
+The Timer LED module implements a countdown timer (default: 80 seconds) using STM32F3Discovery's onboard GPIO LEDs and UART. The timer begins automatically upon startup and updates the LED strip (PE8–PE15) to visually indicate progress. Two additional LEDs—LED X and LED Y (PE7 and PE6)—indicate the start and end of the timer respectively. LED X turns on immediately to signal the beginning, and LED Y lights up at timeout. UART1 (TX: PA9) is used to display the time in mm:ss format on a connected terminal for debugging and tracking.
 
+The timer ticks every second using TIM2, with a blinking effect on the current countdown LED. All logic and hardware abstraction are modularised across gpio.c, timer.c, and uart.c to maintain clarity and reusability.
+
+The flow summary is as follows:
+- LED X (PE7) lights up when timer starts
+- Every second, LEDs update visually to reflect progress
+- Active LED blinks to indicate time passage
+- UART prints countdown in mm:ss format
+- When timer hits zero:
+  - LED X turns off
+  - LED Y (PE6) turns on
+  - UART prints “Game Over!”
+
+#### Main (main.c):
+The main function initialises all modules—GPIO, UART, and Timer. It starts the countdown and hands off control to interrupt-driven logic. No looping logic is required in main as all updates are handled in TIM2_IRQHandler.
+
+```
+gpio_init();
+uart_init();
+timer2_init();
+uart_send_string("--- Timer Started ---");
+```
+
+#### LED Control (gpio.c, gpio.h):
+This module handles:
+- Configuration of all 10 LEDs (PE8–PE15 for strip, PE7 for LED X, PE6 for LED Y)
+- Updating LED states every second based on timer value
+- Blinking behavior of the current active LED using blink_state
+
+```
+update_LEDs(uint16_t seconds);  // Called every second by ISR
+```
+
+- LEDs turn off one-by-one from right to left every 10 seconds
+- Active LED blinks using blink_state toggled each ISR
+- LED X (start) ON at boot, turned OFF on timeout
+- LED Y (end) ON only on timeout
+
+#### UART Debugging (uart.c, uart.h):
+- UART1 (TX: PA9) initialised at 115200 baud
+- Sends real-time countdown every second via:
+
+```
+uart_send_time(seconds_remaining); // Outputs "\rMM:SS"
+```
+
+- Sends final message on timeout: "00:00 - Game Over!"
+
+#### Timer Control and ISR (timer.c, timer.h):
+- TIM2 configured for 1Hz interrupt:
+  - Prescaler: 8000–1
+  - Auto-reload: 1000–1
+- On every TIM2 interrupt:
+  - seconds_remaining is decremented
+  - blink_state is toggled
+  - LEDs and UART are updated
+- At 0 seconds:
+  - LED X turned OFF
+  - LED Y turned ON
+  - Final UART message sent
+
+```
+void TIM2_IRQHandler(void);
+```
+
+Helper functions:
+- get_blink_state() used by LED logic
+- get_seconds_remaining() used by UART display
+
+#### Debug Output via UART1:
+```
+--- Timer Started ---
+01:20
+01:19
+01:18
+...
+00:02
+00:01
+00:00 - Game Over!
+```
 
 ### Integration 
 
