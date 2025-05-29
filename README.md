@@ -402,7 +402,19 @@ Further, an STM LED PE8 was configured as an output within the code, turning on 
 | Potentiometer twist left | Red LED ON, Green LED OFF, STM LED OFF|
 | Potentiometer twist right| Green LED ON, Red LED OFF, STM LED ON |
 
-
+### Additional Modules
+1: Motor Module
+- An additional module was written to control a small motor that would open a chest at the completion of the game
+- The motor was a small PWM continuous motor
+- The code configured the motor, then exposed the functions ```start_motor_forward()``` and ```stop_motor()``, to start and stop the motor
+- A delay was then used to determine the time for which the motor would run, before turning off
+- Physical testing was used to find the time that the motor should run to open the chest fully
+  
+2: Buzzer Module
+- This module controlled a small passive buzzer, to produce a range of frequencies
+- The passive buzzer changed pitch based on the frequency of the AC voltage input
+- Function were written within the buzzer.c module, then called in the main loop
+- Different frequencies and delay times were used to write songs
 
 
 ### Timer Module 
@@ -517,7 +529,6 @@ Helper functions:
 | UART Output    | Timer reaches 00:00                 | UART prints "00:00 - Game Over!"                    |
 | UART Output    | Any time decrement                  | UART prints updated MM:SS string                    |
 | Interrupt Test | TIM2 IRQ handler triggers           | Updates blink state, seconds, LEDs, and UART        |
-
 
 ### Integration 
 
