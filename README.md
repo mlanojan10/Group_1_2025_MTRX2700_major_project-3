@@ -83,6 +83,28 @@ while (1) {
 }
 ```
 
+#### Functions
+
+| Function Name              | Description                                                                                  |
+|---------------------------|----------------------------------------------------------------------------------------------|
+| `map(val, in_min, in_max, out_min, out_max)` | Maps a value from one range to another, used to convert ADC readings to PWM ranges.         |
+| `get_filtered_distance()` | Returns a rolling average of the last 5 LIDAR distance readings for noise reduction.         |
+| `enable_clocks()`         | Enables AHB peripheral clocks for GPIO ports A, C, and E.                                    |
+| `initialise_board()`      | Configures PE8–PE15 on the Discovery board as output for onboard LEDs.                       |
+| `HAL_TIM_IC_CaptureCallback()` | Callback triggered on input capture event from TIM1, calculates pulse width for LIDAR distance.   |
+| `SystemClock_Config()`    | Configures system clocks for HSE, PLL, and peripheral buses.                                 |
+| `MX_GPIO_Init()`          | Initializes GPIO pins for LEDs, I/O, and alternate functions.                                |
+| `MX_I2C1_Init()`          | Configures I2C1 peripheral for LIDAR or PTU communication.                                   |
+| `MX_USB_PCD_Init()`       | Initializes USB peripheral for PCD communication (not used directly in LIDAR loop).          |
+| `MX_TIM1_Init()`          | Sets up TIM1 for input capture mode to read PWM signal from LIDAR.                           |
+| `MX_TIM2_Init()`          | Initializes TIM2 to generate PWM signals for PTU pan and tilt servo motors.                 |
+| `MX_ADC1_Init()`          | Initializes ADC1 (PA2) for reading the horizontal joystick (X-axis).                         |
+| `MX_ADC2_Init()`          | Initializes ADC2 (PA4) for reading the vertical joystick (Y-axis).                           |
+| `main()`                  | Main entry point: initializes all modules and runs the joystick control and LIDAR check loop.|
+| `Error_Handler()`         | Stops system execution in case of an error (used for debug and development).                 |
+| `assert_failed()`         | Debug helper to report assertion failures if `USE_FULL_ASSERT` is enabled.                   |
+
+
 #### Testing 
 
 | Scenario                 | Expected Output                     |
