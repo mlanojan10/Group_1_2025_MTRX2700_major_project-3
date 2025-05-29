@@ -1,0 +1,4 @@
+../Core/Src/signal.c:4:6:Signal_Init	1
+../Core/Src/signal.c:19:6:Signal_SetHigh	1
+../Core/Src/signal.c:23:6:Signal_SetLow	1
+../Core/Src/signal.c:27:6:Signal_CheckStart	1

@@ -1,0 +1,9 @@
+../Core/Src/led_control.c:6:13:delay_ms	24	static,ignoring_inline_asm
+../Core/Src/led_control.c:13:6:LED_Init	4	static
+../Core/Src/led_control.c:27:6:LED_Set	16	static
+../Core/Src/led_control.c:36:6:LED_ClearAll	4	static
+../Core/Src/led_control.c:40:6:LED_DisplayPattern	32	static
+../Core/Src/led_control.c:51:6:LED_BlueOn	4	static
+../Core/Src/led_control.c:55:6:LED_BlueOff	4	static
+../Core/Src/led_control.c:60:6:LED_SignalFailure	8	static
+../Core/Src/led_control.c:67:6:LED_SignalSuccess	8	static

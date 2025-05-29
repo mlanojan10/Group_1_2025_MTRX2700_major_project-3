@@ -1,0 +1,4 @@
+../Core/Src/signal.c:4:6:Signal_Init	4	static
+../Core/Src/signal.c:19:6:Signal_SetHigh	4	static
+../Core/Src/signal.c:23:6:Signal_SetLow	4	static
+../Core/Src/signal.c:27:6:Signal_CheckStart	4	static

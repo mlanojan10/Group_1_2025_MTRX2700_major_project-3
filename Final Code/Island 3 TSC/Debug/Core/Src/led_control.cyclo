@@ -1,0 +1,9 @@
+../Core/Src/led_control.c:6:13:delay_ms	2
+../Core/Src/led_control.c:13:6:LED_Init	1
+../Core/Src/led_control.c:27:6:LED_Set	3
+../Core/Src/led_control.c:36:6:LED_ClearAll	1
+../Core/Src/led_control.c:40:6:LED_DisplayPattern	2
+../Core/Src/led_control.c:51:6:LED_BlueOn	1
+../Core/Src/led_control.c:55:6:LED_BlueOff	1
+../Core/Src/led_control.c:60:6:LED_SignalFailure	1
+../Core/Src/led_control.c:67:6:LED_SignalSuccess	1
