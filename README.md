@@ -497,6 +497,21 @@ Helper functions:
 00:00 - Game Over!
 ```
 
+#### Testing:
+| Sub Module     | User Input / Condition              | Expected Output                                      |
+|----------------|-------------------------------------|------------------------------------------------------|
+| Timer Start    | Power ON                            | UART prints "--- Timer Started ---" + "08:00"        |
+| Countdown      | Every 1 second                      | Timer decrements by 1, UART updates MM:SS format     |
+| LED Display    | 10 seconds elapsed                  | LED 0 (PE15) OFF, LED 1 (PE14) starts blinking       |
+| LED Blinking   | Current active LED                  | Blinks every second while it's the current segment   |
+| LED Sequence   | 70 seconds elapsed                  | All LEDs OFF except PE8, which blinks               |
+| LED X          | On timer start                      | PE7 turns ON for 2 seconds, then OFF                |
+| LED Y          | Timer reaches 00:00                 | PE6 turns ON, PE7 turns OFF                          |
+| UART Output    | Timer reaches 00:00                 | UART prints "00:00 - Game Over!"                    |
+| UART Output    | Any time decrement                  | UART prints updated MM:SS string                    |
+| Interrupt Test | TIM2 IRQ handler triggers           | Updates blink state, seconds, LEDs, and UART        |
+
+
 ### Integration 
 
 ![Image](https://github.com/user-attachments/assets/4a3fe5c0-dc13-4e34-8cef-2b5e24a87752)
